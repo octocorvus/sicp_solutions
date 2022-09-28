@@ -1,0 +1,25 @@
+#lang sicp
+
+(define (pascals-triangle row column)
+  (if (or (= column 0)
+          (= row column))
+      1
+      (+ (pascals-triangle (- row 1) (- column 1))
+         (pascals-triangle (- row 1) column))))
+
+(pascals-triangle 0 0)
+(pascals-triangle 1 0)
+(pascals-triangle 1 1)
+(pascals-triangle 2 0)
+(pascals-triangle 2 1)
+(pascals-triangle 2 2)
+(pascals-triangle 3 0)
+(pascals-triangle 3 1)
+(pascals-triangle 3 2)
+(pascals-triangle 3 3)
+(pascals-triangle 4 0)
+(pascals-triangle 4 1)
+(pascals-triangle 4 2)
+(pascals-triangle 4 3)
+(pascals-triangle 4 4)
+;(pascals-triangle 420 69)

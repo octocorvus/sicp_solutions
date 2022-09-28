@@ -1,0 +1,13 @@
+#lang sicp
+
+(define (filtered-accumulate
+         filter? combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a)
+              (combiner result
+                        (if (filter? a)
+                            (term a)
+                            null-value)))))
+  (iter a null-value))

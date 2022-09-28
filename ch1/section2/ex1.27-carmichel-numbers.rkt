@@ -1,0 +1,60 @@
+#lang sicp
+
+(define (square x)
+  (* x x))
+
+(define (expmod base exp m)
+  (define (iter base exp result)
+    (cond ((= exp 0)
+           result)
+          ((even? exp)
+           (iter (remainder (square base)
+                            m)
+                 (/ exp 2)
+                 result))
+          (else
+           (iter base
+                 (- exp 1)
+                 (remainder (* result
+                               base)
+                            m)))))
+  (iter base exp 1))
+
+(define (fermat-test n)
+  (define (try-it a)
+    (= (expmod a n n) a))
+  (define (iter a)
+    (cond ((= a n)
+           true)
+          ((try-it a)
+           (display "   ")
+           (display a)
+           (display "^")
+           (display n)
+           (display " is conguruent to ")
+           (display a)
+           (display " modulo ")
+           (display n)
+           (newline)
+           (iter (+ a 1)))
+          (else
+           false)))
+  (iter 1))
+
+(define (test n)
+  (newline)
+  (display "Testing ")
+  (display n)
+  (newline)
+  (if (fermat-test n)
+      (display " ** It fooled the Fermat test")
+      (display " ** It did not fool the Fermat test"))
+  (newline))
+
+(test 561)
+(test 1105)
+(test 1729)
+(test 2465)
+(test 2821)
+(test 6601)
+
